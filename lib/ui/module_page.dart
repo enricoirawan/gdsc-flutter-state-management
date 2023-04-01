@@ -9,8 +9,6 @@ class ModulePage extends StatefulWidget {
 }
 
 class _ModulePageState extends State<ModulePage> {
-  final List<String> doneModuleList = [];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
