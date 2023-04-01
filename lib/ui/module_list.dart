@@ -1,8 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 class ModuleList extends StatefulWidget {
-  final List<String> doneModuleList;
-  const ModuleList({Key? key, required this.doneModuleList}) : super(key: key);
+  const ModuleList({Key? key}) : super(key: key);
 
   @override
   State<ModuleList> createState() => _ModuleListState();
@@ -24,43 +25,46 @@ class _ModuleListState extends State<ModuleList> {
 
   @override
   Widget build(BuildContext context) {
+    log("ModuleList Build");
     return ListView.builder(
       itemCount: _moduleList.length,
       itemBuilder: (context, index) {
         return ModuleTile(
           moduleName: _moduleList[index],
-          isDone: widget.doneModuleList.contains(_moduleList[index]),
-          onClick: () {
-            setState(() {
-              widget.doneModuleList.add(_moduleList[index]);
-            });
-          },
         );
       },
     );
   }
 }
 
-class ModuleTile extends StatelessWidget {
+class ModuleTile extends StatefulWidget {
   final String moduleName;
-  final bool isDone;
-  final Function() onClick;
 
   const ModuleTile({
     Key? key,
     required this.moduleName,
-    required this.isDone,
-    required this.onClick,
   }) : super(key: key);
 
   @override
+  State<ModuleTile> createState() => _ModuleTileState();
+}
+
+class _ModuleTileState extends State<ModuleTile> {
+  bool isDone = false;
+
+  @override
   Widget build(BuildContext context) {
+    log("ModuleTile Build");
     return ListTile(
-      title: Text(moduleName),
+      title: Text(widget.moduleName),
       trailing: isDone
           ? const Icon(Icons.done)
           : ElevatedButton(
-              onPressed: onClick,
+              onPressed: () {
+                setState(() {
+                  isDone = true;
+                });
+              },
               child: const Text('Done'),
             ),
     );
