@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 class ModuleList extends StatefulWidget {
@@ -22,21 +24,49 @@ class _ModuleListState extends State<ModuleList> {
     'Modul 10 - Effective Dart',
   ];
 
+  Widget _complexWidget() {
+    log("Complex Widget Build");
+    return Column(
+      children: [
+        Column(),
+        Column(),
+        Column(),
+        Column(),
+        Column(),
+        Column(),
+        Column(),
+        Column(),
+        Column(),
+        Column(),
+        Column(),
+        Column(),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: _moduleList.length,
-      itemBuilder: (context, index) {
-        return ModuleTile(
-          moduleName: _moduleList[index],
-          isDone: widget.doneModuleList.contains(_moduleList[index]),
-          onClick: () {
-            setState(() {
-              widget.doneModuleList.add(_moduleList[index]);
-            });
-          },
-        );
-      },
+    log("ModuleList Build");
+    return Column(
+      children: [
+        _complexWidget(),
+        Expanded(
+          child: ListView.builder(
+            itemCount: _moduleList.length,
+            itemBuilder: (context, index) {
+              return ModuleTile(
+                moduleName: _moduleList[index],
+                isDone: widget.doneModuleList.contains(_moduleList[index]),
+                onClick: () {
+                  setState(() {
+                    widget.doneModuleList.add(_moduleList[index]);
+                  });
+                },
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }
@@ -55,6 +85,7 @@ class ModuleTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log("ModuleTime Build");
     return ListTile(
       title: Text(moduleName),
       trailing: isDone
