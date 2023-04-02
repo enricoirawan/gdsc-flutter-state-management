@@ -1,9 +1,9 @@
+import 'package:dicodingacademy/module_bloc/module_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DoneModuleList extends StatelessWidget {
-  final List<String> doneModuleList;
-  const DoneModuleList({Key? key, required this.doneModuleList})
-      : super(key: key);
+  const DoneModuleList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,13 +11,15 @@ class DoneModuleList extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Done Module List'),
       ),
-      body: ListView.builder(
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(doneModuleList[index]),
-          );
-        },
-        itemCount: doneModuleList.length,
+      body: BlocBuilder<ModuleBloc, ModuleState>(
+        builder: (context, state) => ListView.builder(
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: Text(state.doneModuleList[index]),
+            );
+          },
+          itemCount: state.doneModuleList.length,
+        ),
       ),
     );
   }

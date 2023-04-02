@@ -1,10 +1,11 @@
 import 'dart:developer';
 
+import 'package:dicodingacademy/module_bloc/module_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ModuleList extends StatefulWidget {
-  final List<String> doneModuleList;
-  const ModuleList({Key? key, required this.doneModuleList}) : super(key: key);
+  const ModuleList({Key? key}) : super(key: key);
 
   @override
   State<ModuleList> createState() => _ModuleListState();
@@ -51,16 +52,19 @@ class _ModuleListState extends State<ModuleList> {
       children: [
         _complexWidget(),
         Expanded(
-          child: ListView.builder(
-            itemCount: _moduleList.length,
-            itemBuilder: (context, index) {
-              return ModuleTile(
-                moduleName: _moduleList[index],
-                isDone: widget.doneModuleList.contains(_moduleList[index]),
-                onClick: () {
-                  setState(() {
-                    widget.doneModuleList.add(_moduleList[index]);
-                  });
+          child: BlocBuilder<ModuleBloc, ModuleState>(
+            builder: (context, state) {
+              return ListView.builder(
+                itemCount: _moduleList.length,
+                itemBuilder: (context, index) {
+                  return ModuleTile(
+                    moduleName: _moduleList[index],
+                    isDone: state.doneModuleList.contains(_moduleList[index]),
+                    onClick: () {
+                      context.read<ModuleBloc>().add(
+                          AddDoneModuleEvent(doneModule: _moduleList[index]));
+                    },
+                  );
                 },
               );
             },
