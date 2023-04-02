@@ -23,16 +23,43 @@ class _ModuleListState extends State<ModuleList> {
     'Modul 10 - Effective Dart',
   ];
 
+  Widget _complexWidget() {
+    log("Complex Widget Build");
+    return Column(
+      children: [
+        Column(),
+        Column(),
+        Column(),
+        Column(),
+        Column(),
+        Column(),
+        Column(),
+        Column(),
+        Column(),
+        Column(),
+        Column(),
+        Column(),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     log("ModuleList Build");
-    return ListView.builder(
-      itemCount: _moduleList.length,
-      itemBuilder: (context, index) {
-        return ModuleTile(
-          moduleName: _moduleList[index],
-        );
-      },
+    return Column(
+      children: [
+        _complexWidget(),
+        Expanded(
+          child: ListView.builder(
+            itemCount: _moduleList.length,
+            itemBuilder: (context, index) {
+              return ModuleTile(
+                moduleName: _moduleList[index],
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }
