@@ -85,7 +85,7 @@ class ModuleTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log("ModuleTime Build");
+    log("ModuleTile Build");
     return ListTile(
       title: Text(moduleName),
       trailing: isDone
