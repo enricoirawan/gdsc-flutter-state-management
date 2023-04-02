@@ -1,3 +1,4 @@
+import 'package:dicodingacademy/ui/done_module_list.dart';
 import 'package:dicodingacademy/ui/module_list.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,13 @@ class _ModulePageState extends State<ModulePage> {
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.done),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const DoneModuleList(),
+                ),
+              );
+            },
           ),
         ],
       ),

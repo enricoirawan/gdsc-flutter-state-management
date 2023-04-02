@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 class DoneModuleList extends StatelessWidget {
   final List<String> doneModuleList;
-  const DoneModuleList({Key? key, required this.doneModuleList})
-      : super(key: key);
+  const DoneModuleList({
+    Key? key,
+    this.doneModuleList = const [],
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
